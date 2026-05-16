@@ -33,12 +33,16 @@ To enter commands press `:`
 - `e / E` End of word / WORD (Skip punctuation)
 - `0 / ^` Line start / first non-blank
 - `$` Line end
+- `f<char> / F<char>` Find moves the cursor onto the next occurrence of <char> / moves backwards
+- `t<char> / T<char>` Till moves the cursor to just before the next occurrence of <char> / moves backwards
+- `; / ,` Repeat last `f t F T` motion in the same / opposite direction
 - `gg / G` File start / file end
 - `:<N>` Go to line number N
 - `&` Jump to matching bracket
 - `{ / }` Prev / next blank line (paragraph)
 - `Ctrl+d / Ctrl+v` Half-page down / up
 - `Ctrl+f / Ctrl+b` Full-page down / up
+- `/<text>` Search for <text>
 
 ## Editing
 - `x` Delete character
@@ -51,11 +55,13 @@ To enter commands press `:`
 - `r` Replace single character
 - `J` Join line below to current
 - `.` Repeat last change
+- `> / <` Indent / un-indent
+- `gu / gU / ~` Lowercase / uppercase / toggle
 
 Motions can be repeated by prepending with a number. The format for *change* commands is:
 
 `operator number motion`
-- Operator: What to do
+- Operator: What to do (`c`, `d`, `y`, `v`, `gu`, `gU`, `~`, `>`, `<`)
 - Number: Optional count to repeat the motion
 - Motion: How we move over the text
 For example `d2w` will delete until the next word twice.
