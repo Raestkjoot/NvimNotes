@@ -57,6 +57,14 @@ To enter commands press `:`
 ### Changing Multiple Occurences
 `*cgn.`: We can `*` to start looking for occurences, then `c` to change and `gn` to go next, write in what you want instead and use `.` to repeat. To go back you can use `#` or `N`.
 
+### Marks and Jumps
+- `m<a-z>` Set local mark
+- `m<A-Z>` Set global mark
+- `'<mark>` Jump to mark line
+- `''` Jump to last position
+- `Ctrl+o / Ctrl+i` Jump back / forward in history
+- `:marks` List all marks
+
 ## Editing
 - `x` Delete character
 - `dd / D` Delete line / to end of line
