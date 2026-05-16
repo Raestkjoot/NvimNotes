@@ -9,6 +9,7 @@ To enter commands press `:`
 - quit: `:q`
 - save and quit: `:wq`
 - quit without saving: `:q!`
+- `:e <file>` edit file
 
 ## Modes
 - `i` Insert before cursor
@@ -45,6 +46,7 @@ To enter commands press `:`
 - `/<text> / ?<text>` Search for text / search backwards
 - `* / #` Search for word under cursor
 - `n / N` Next / previous match
+- `:noh` Clear search highlight
 
 ### Navigation Hierarchy
 1. Whole file: `gg`, `G`, `/<pattern>`
