@@ -102,3 +102,8 @@ Operations can also be applied to different text objects. The format is
 - `{` Inner / around braces
 - `t` Inner / around HTML tags
 For example: `diw` to delete a word.
+
+## Config
+The config file is in `~/.config/nvim/init.lua`
+
+To add line numbers we can use the command `vim.opt.number = true`. Because we can easily jump number of lines with commands such as `10j`, it is nice to know where the relative line number. The command for relative line numbers is `vim.opt.relativenumber = true`.
