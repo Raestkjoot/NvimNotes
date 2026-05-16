@@ -46,13 +46,13 @@ To enter commands press `:`
 - `* / #` Search for word under cursor
 - `n / N` Next / previous match
 
-### Navigation hierarchy
+### Navigation Hierarchy
 1. Whole file: `gg`, `G`, `/<pattern>`
 2. Line anchor: `0`, `^`, `$`
 3. Same line: `f<char>`, `t<char>`, `;`, `,`
 4. Nearby words: `w`, `b`, `e`
 
-### Changing multiple occurences
+### Changing Multiple Occurences
 `*cgn.`: We can `*` to start looking for occurences, then `c` to change and `gn` to go next, write in what you want instead and use `.` to repeat. To go back you can use `#` or `N`.
 
 ## Editing
@@ -69,6 +69,7 @@ To enter commands press `:`
 - `> / <` Indent / un-indent
 - `gu / gU / ~` Lowercase / uppercase / toggle
 
+### Repeated Motions
 Motions can be repeated by prepending with a number. The format for *change* commands is:
 
 `operator number motion`
@@ -77,3 +78,18 @@ Motions can be repeated by prepending with a number. The format for *change* com
 - Motion: How we move over the text
 For example `d2w` will delete until the next word twice.
 
+### Text Objects
+Operations can also be applied to different text objects. The format is 
+
+`Operator <i/a> object`
+- `w` Inner / around word
+- `s` Inner / around sentence
+- `p` Inner / around paragraph
+- `"` Inner / around double quotes
+- `'` Inner / around single quotes
+- ``` Inner / around backticks
+- `(` Inner / around parentheses
+- `[` Inner / around brackets
+- `{` Inner / around braces
+- `t` Inner / around HTML tags
+For example: `diw` to delete a word.
