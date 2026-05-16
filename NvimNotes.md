@@ -97,7 +97,6 @@ Operations can also be applied to different text objects. The format is
 - `p` Inner / around paragraph
 - `"` Inner / around double quotes
 - `'` Inner / around single quotes
-- ``` Inner / around backticks
 - `(` Inner / around parentheses
 - `[` Inner / around brackets
 - `{` Inner / around braces
