@@ -41,7 +41,7 @@ To enter commands press `:`
 - `:<N>` Go to line number N
 - `&` Jump to matching bracket
 - `{ / }` Prev / next blank line (paragraph)
-- `Ctrl+d / Ctrl+v` Half-page down / up
+- `Ctrl+d / Ctrl+u` Half-page down / up
 - `Ctrl+f / Ctrl+b` Full-page down / up
 - `/<text> / ?<text>` Search for text / search backwards
 - `* / #` Search for word under cursor
