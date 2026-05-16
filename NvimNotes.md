@@ -42,7 +42,18 @@ To enter commands press `:`
 - `{ / }` Prev / next blank line (paragraph)
 - `Ctrl+d / Ctrl+v` Half-page down / up
 - `Ctrl+f / Ctrl+b` Full-page down / up
-- `/<text>` Search for text
+- `/<text> / ?<text>` Search for text / search backwards
+- `* / #` Search for word under cursor
+- `n / N` Next / previous match
+
+### Navigation hierarchy
+1. Whole file: `gg`, `G`, `/<pattern>`
+2. Line anchor: `0`, `^`, `$`
+3. Same line: `f<char>`, `t<char>`, `;`, `,`
+4. Nearby words: `w`, `b`, `e`
+
+### Changing multiple occurences
+`*cgn.`: We can `*` to start looking for occurences, then `c` to change and `gn` to go next, write in what you want instead and use `.` to repeat. To go back you can use `#` or `N`.
 
 ## Editing
 - `x` Delete character
