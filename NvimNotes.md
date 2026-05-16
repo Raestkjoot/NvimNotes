@@ -33,8 +33,8 @@ To enter commands press `:`
 - `e / E` End of word / WORD (Skip punctuation)
 - `0 / ^` Line start / first non-blank
 - `$` Line end
-- `f<char> / F<char>` Find moves the cursor onto the next occurrence of <char> / moves backwards
-- `t<char> / T<char>` Till moves the cursor to just before the next occurrence of <char> / moves backwards
+- `f<char> / F<char>` Find moves the cursor onto the next occurrence of char / moves backwards
+- `t<char> / T<char>` Till moves the cursor to just before the next occurrence of char / moves backwards
 - `; / ,` Repeat last `f t F T` motion in the same / opposite direction
 - `gg / G` File start / file end
 - `:<N>` Go to line number N
@@ -42,7 +42,7 @@ To enter commands press `:`
 - `{ / }` Prev / next blank line (paragraph)
 - `Ctrl+d / Ctrl+v` Half-page down / up
 - `Ctrl+f / Ctrl+b` Full-page down / up
-- `/<text>` Search for <text>
+- `/<text>` Search for text
 
 ## Editing
 - `x` Delete character
