@@ -54,9 +54,6 @@ To enter commands press `:`
 3. Same line: `f<char>`, `t<char>`, `;`, `,`
 4. Nearby words: `w`, `b`, `e`
 
-### Changing Multiple Occurences
-`*cgn.`: We can `*` to start looking for occurences, then `c` to change and `gn` to go next, write in what you want instead and use `.` to repeat. To go back you can use `#` or `N`.
-
 ### Marks and Jumps
 - `m<a-z>` Set local mark
 - `m<A-Z>` Set global mark
@@ -78,6 +75,9 @@ To enter commands press `:`
 - `.` Repeat last change
 - `> / <` Indent / un-indent
 - `gu / gU / ~` Lowercase / uppercase / toggle
+
+### Changing Multiple Occurences
+`*cgn.`: We can `*` to start looking for occurences, then `c` to change and `gn` to go next, write in what you want instead and use `.` to repeat. To go back you can use `#` or `N`.
 
 ### Repeated Motions
 Motions can be repeated by prepending with a number. The format for *change* commands is:
