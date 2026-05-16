@@ -107,3 +107,5 @@ For example: `diw` to delete a word.
 The config file is in `~/.config/nvim/init.lua`
 
 To add line numbers we can use the command `vim.opt.number = true`. Because we can easily jump number of lines with commands such as `10j`, it is nice to know where the relative line number. The command for relative line numbers is `vim.opt.relativenumber = true`.
+
+By default the tab size is pretty large. We can change this with `vim.opt.tabstop = 3`, this will make a tab be 3 characters wide. There is a different setting for tab width for some specific vim functions, to make these automatically match the tabstop size, we can set it to zero `vim.opt.shiftwidth = 0`. Finally, we can make tabs automatically expand to spaces (or not) with the command `vim.opt.expandtab = true`.
