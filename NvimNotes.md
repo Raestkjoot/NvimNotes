@@ -39,7 +39,7 @@ To enter commands press `:`
 - `; / ,` Repeat last `f t F T` motion in the same / opposite direction
 - `gg / G` File start / file end
 - `:<N>` Go to line number N
-- `&` Jump to matching bracket
+- `%` Jump to matching bracket
 - `{ / }` Prev / next blank line (paragraph)
 - `Ctrl+d / Ctrl+u` Half-page down / up
 - `Ctrl+f / Ctrl+b` Full-page down / up
@@ -50,9 +50,10 @@ To enter commands press `:`
 
 ### Navigation Hierarchy
 1. Whole file: `gg`, `G`, `/<pattern>`
-2. Line anchor: `0`, `^`, `$`
-3. Same line: `f<char>`, `t<char>`, `;`, `,`
-4. Nearby words: `w`, `b`, `e`
+2. Multiple lines: `ctrl+d` `ctrl+u`, `<num>j`, `<num>k`
+3. Line anchor: `0`, `^`, `$`
+4. Same line: `f<char>`, `t<char>`, `;`, `,`
+5. Nearby words: `w`, `b`, `e`
 
 ### Marks and Jumps
 - `m<a-z>` Set local mark
@@ -107,5 +108,12 @@ For example: `diw` to delete a word.
 The config file is in `~/.config/nvim/init.lua`
 
 To add line numbers we can use the command `vim.opt.number = true`. Because we can easily jump number of lines with commands such as `10j`, it is nice to know where the relative line number. The command for relative line numbers is `vim.opt.relativenumber = true`.
+By setting both to be true, we get relative numbers, while we also get the actual line number of the line we are currently on.
 
 By default the tab size is pretty large. We can change this with `vim.opt.tabstop = 3`, this will make a tab be 3 characters wide. There is a different setting for tab width for some specific vim functions, to make these automatically match the tabstop size, we can set it to zero `vim.opt.shiftwidth = 0`. Finally, we can make tabs automatically expand to spaces (or not) with the command `vim.opt.expandtab = true`.
+
+## Splits & Windows
+- `Ctrl+w s` Horisontal split
+- `Ctrl+w v` Vertical split
+- `Ctrl+w h/j/k/l` Move between splits
+- `Ctrl+w q` Close split
