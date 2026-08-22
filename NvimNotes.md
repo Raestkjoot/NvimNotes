@@ -117,3 +117,35 @@ By default the tab size is pretty large. We can change this with `vim.opt.tabsto
 - `Ctrl+w v` Vertical split
 - `Ctrl+w h/j/k/l` Move between splits
 - `Ctrl+w q` Close split
+
+# Plugins
+
+## Oil
+[oil.nvim on github](https://github.com/stevearc/oil.nvim)
+
+A file explorer that lets you edit your filesystem like a normal Neovim buffer. It doesn't work like regular file tres that stay on the side and open the files in another view, but overlays the view where it will open the file, which works well with neovim and multiview editing.
+
+### Setup
+I installed it as a Neovim native package, not using a plugin manager. Clone the repository into Neovim's native pack directory
+```
+git clone --depth=1 https://github.com/stevearc/oil.nvim.git \
+  "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/oil/start/oil.nvim
+```
+
+Then, add `require("oil").setup()` to the init.lua file. Now we can open oil with the command `:Oil`. I like to open it as a floating window, so I will add a key to the vim keymap that will do just that. 
+```
+vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open oil in float" })
+```
+This lets me open oil with the `-` key.
+
+### Usage
+- `-` - Open the parent directory of the current file.
+- `nvim .` - We can start Neovim in some directory like this and it will open it with Oil.
+- `g.` - Toggle hidden files (with Oil open).
+The cool thing with Oil is that editing your file tree works just like regular text edits in Neovim.
+- **Create:** Create a file by adding a new line with `o` and writing the file name.
+- **Delete:** Delete a file with the vim command `dd`.
+- **Move:** After deleting, paste it with `p`.
+- **Copy:** Copy by yanking the line `V` then `y`, then paste the line with `p`.
+- **Save:** Save the changes you've made to the file tree with `:w`.
+- **Discard:** If you want to discard your changes, then quit without writing `:q!`.
