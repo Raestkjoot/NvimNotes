@@ -121,12 +121,12 @@ By default the tab size is pretty large. We can change this with `vim.opt.tabsto
 # Plugins
 
 ## Oil
-[oil.nvim on github](https://github.com/stevearc/oil.nvim)
+[oil.nvim](https://github.com/stevearc/oil.nvim)
 
-A file explorer that lets you edit your filesystem like a normal Neovim buffer. It doesn't work like regular file tres that stay on the side and open the files in another view, but overlays the view where it will open the file, which works well with neovim and multiview editing.
+A file explorer that lets you edit your filesystem like a normal Neovim buffer. It doesn't work like regular file trees that stay on the side and open the files in another view. Instead, it overlays the view where it will open the file, which works well with neovim and multiview editing.
 
 ### Setup
-I installed it as a Neovim native package, not using a plugin manager. Clone the repository into Neovim's native pack directory
+The most bare-bones way to install it is as a native package, not using a plugin manager. Clone the repository into Neovim's native pack directory
 ```
 git clone --depth=1 https://github.com/stevearc/oil.nvim.git \
   "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/oil/start/oil.nvim
@@ -142,6 +142,7 @@ This lets me open oil with the `-` key.
 - `-` - Open the parent directory of the current file.
 - `nvim .` - We can start Neovim in some directory like this and it will open it with Oil.
 - `g.` - Toggle hidden files (with Oil open).
+
 The cool thing with Oil is that editing your file tree works just like regular text edits in Neovim.
 - **Create:** Create a file by adding a new line with `o` and writing the file name.
 - **Delete:** Delete a file with the vim command `dd`.
