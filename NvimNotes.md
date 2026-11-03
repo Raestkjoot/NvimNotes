@@ -158,6 +158,7 @@ The cool thing with Oil is that editing your file tree works just like regular t
 - **Copy:** Copy by yanking the line `V` then `y`, then paste the line with `p`.
 - **Save:** Save the changes you've made to the file tree with `:w`.
 - **Discard:** If you want to discard your changes, then quit without writing `:q!`.
+- **Select:** Select a file or directory with `enter` or, if you've bound it, `space`.
 
 # Keybinds
 The escape key is very important in vim, but it is one of the furthest keys from the home row. Meanwhile, caps-lock is one of the least important keys and it sits at one of the best positions right next to the homerow. 
