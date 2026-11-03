@@ -76,6 +76,8 @@ To enter commands press `:`
 - `.` Repeat last change
 - `> / <` Indent / un-indent
 - `gu / gU / ~` Lowercase / uppercase / toggle
+- `Ctrl+w` Delete previous word
+- `Ctrl+` Delete to start of line
 
 ### Changing Multiple Occurences
 `*cgn.`: We can `*` to start looking for occurences, then `c` to change and `gn` to go next, write in what you want instead and use `.` to repeat. To go back you can use `#` or `N`.
