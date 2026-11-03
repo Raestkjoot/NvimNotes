@@ -8,7 +8,7 @@ To enter commands press `:`
 - save: `:w`
 - quit: `:q`
 - save and quit: `:wq`
-- quit without saving: `:q!`
+- quit without saving: `:q!
 - `:e <file>` edit file
 
 ## Modes
@@ -43,6 +43,7 @@ To enter commands press `:`
 - `{ / }` Prev / next blank line (paragraph)
 - `Ctrl+d / Ctrl+u` Half-page down / up
 - `Ctrl+f / Ctrl+b` Full-page down / up
+- `H / M / L` Jump to top, middle or end of the visible screen
 - `/<text> / ?<text>` Search for text / search backwards
 - `* / #` Search for word under cursor
 - `n / N` Next / previous match
@@ -161,6 +162,7 @@ The cool thing with Oil is that editing your file tree works just like regular t
 - **Select:** Select a file or directory with `enter` or, if you've bound it, `space`.
 
 # Keybinds
+## Caps-Lock to Escape and Control
 The escape key is very important in vim, but it is one of the furthest keys from the home row. Meanwhile, caps-lock is one of the least important keys and it sits at one of the best positions right next to the homerow. 
 
 We can use [keyd](https://github.com/rvaiya/keyd) to rebind our caps-lock key at the kernel level.
@@ -183,3 +185,17 @@ esc = capslock
 ```
 
 3. Run `sudo keyd reload` to reload the config set.
+
+## Jump to empty line
+Vim has jump to previous/next empty line bound to `{ / }` by default, which makes sense on a US keyboard layout, but on a scandinavian layout it's pretty difficult to use. So I've rebound it to `shift + j / k`, which overwrites some existing keybinds, but it's probably fine.
+```
+vim.keymap.set({ "n", "v" }, "K", "{")
+vim.keymap.set({ "n", "v" }, "J", "}")
+```
+
+## Move line
+I've added `alt + j / k` to move a line up and down.
+```
+vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
+```
