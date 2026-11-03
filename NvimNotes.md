@@ -154,7 +154,7 @@ The cool thing with Oil is that editing your file tree works just like regular t
 # Keybinds
 The escape key is very important in vim, but it is one of the furthest keys from the home row. Meanwhile, caps-lock is one of the least important keys and it sits at one of the best positions right next to the homerow. 
 
-We can use `keyd` to rebind our caps-lock key at the kernel level.
+We can use [keyd](https://github.com/rvaiya/keyd) to rebind our caps-lock key at the kernel level.
 1. Install and start keyd (e.g `sudo systemctl enable keyd --now`)
 
 2. Put the following in `/etc/keyd/default.conf`:
