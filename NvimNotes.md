@@ -138,7 +138,13 @@ Then, add `require("oil").setup()` to the init.lua file. Now we can open oil wit
 ```
 vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open oil in float" })
 ```
-This lets me open oil with the `-` key.
+This lets me open oil with the `-` key from anywhere.
+
+To add a keybind that is specific to Oil, we can use its setup function.
+```
+require("oil").setup({ keymaps = { ["<Space>"] = "actions.select" } })
+```
+This lets us use `space` to enter files and directories.
 
 ### Usage
 - `-` - Open the parent directory of the current file.
