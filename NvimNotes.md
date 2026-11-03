@@ -150,3 +150,27 @@ The cool thing with Oil is that editing your file tree works just like regular t
 - **Copy:** Copy by yanking the line `V` then `y`, then paste the line with `p`.
 - **Save:** Save the changes you've made to the file tree with `:w`.
 - **Discard:** If you want to discard your changes, then quit without writing `:q!`.
+
+# Keybinds
+The escape key is very important in vim, but it is one of the furthest keys from the home row. Meanwhile, caps-lock is one of the least important keys and it sits at one of the best positions right next to the homerow. 
+
+We can use `keyd` to rebind our caps-lock key at the kernel level.
+1. Install and start keyd (e.g `sudo systemctl enable keyd --now`)
+
+2. Put the following in `/etc/keyd/default.conf`:
+
+```
+[ids]
+
+*
+
+[main]
+
+# Maps capslock to escape when pressed and control when held.
+capslock = overload(control, esc)
+
+# Remaps the escape key to capslock
+esc = capslock
+```
+
+3. Run `sudo keyd reload` to reload the config set.
