@@ -8,7 +8,7 @@ To enter commands press `:`
 - save: `:w`
 - quit: `:q`
 - save and quit: `:wq`
-- quit without saving: `:q!
+- quit without saving: `:q!`
 - `:e <file>` edit file
 
 ## Modes
