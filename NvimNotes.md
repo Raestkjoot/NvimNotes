@@ -122,7 +122,7 @@ For example: `diw` to delete a word.
 
 Each of these will modify the size by 1, which is not a lot. Prefix with a count to resize by more than one. E.g. to widen by 20, input `20 Ctrl+w >`
 
-## Config
+# Config
 The config file is in `~/.config/nvim/init.lua`
 
 To add line numbers we can use the command `vim.opt.number = true`. Because we can easily jump number of lines with commands such as `10j`, it is nice to know where the relative line number. The command for relative line numbers is `vim.opt.relativenumber = true`.
@@ -130,14 +130,14 @@ By setting both to be true, we get relative numbers, while we also get the actua
 
 By default the tab size is pretty large. We can change this with `vim.opt.tabstop = 3`, this will make a tab be 3 characters wide. There is a different setting for tab width for some specific vim functions, to make these automatically match the tabstop size, we can set it to zero `vim.opt.shiftwidth = 0`. Finally, we can make tabs automatically expand to spaces (or not) with the command `vim.opt.expandtab = true`.
 
-# Plugins
+## Plugins
 
-## Oil
+### Oil
 [oil.nvim](https://github.com/stevearc/oil.nvim)
 
 A file explorer that lets you edit your filesystem like a normal Neovim buffer. It doesn't work like regular file trees that stay on the side and open the files in another view. Instead, it overlays the view where it will open the file, which works well with neovim and multiview editing.
 
-### Setup
+**Setup:**
 The most bare-bones way to install it is as a native package, not using a plugin manager. Clone the repository into Neovim's native pack directory
 ```
 git clone --depth=1 https://github.com/stevearc/oil.nvim.git \
@@ -156,7 +156,7 @@ require("oil").setup({ keymaps = { ["<Space>"] = "actions.select" } })
 ```
 This lets us use `space` to enter files and directories.
 
-### Usage
+**Usage:**
 - `-` - Open the parent directory of the current file.
 - `nvim .` - We can start Neovim in some directory like this and it will open it with Oil.
 - `g.` - Toggle hidden files (with Oil open).
@@ -170,8 +170,8 @@ The cool thing with Oil is that editing your file tree works just like regular t
 - **Discard:** If you want to discard your changes, then quit without writing `:q!`.
 - **Select:** Select a file or directory with `enter` or, if you've bound it, `space`.
 
-# Keybinds
-## Caps-Lock to Escape and Control
+## Keybinds
+### Caps-Lock to Escape and Control
 The escape key is very important in vim, but it is one of the furthest keys from the home row. Meanwhile, caps-lock is one of the least important keys and it sits at one of the best positions right next to the homerow. 
 
 We can use [keyd](https://github.com/rvaiya/keyd) to rebind our caps-lock key at the kernel level.
@@ -195,14 +195,14 @@ esc = capslock
 
 3. Run `sudo keyd reload` to reload the config set.
 
-## Jump to empty line
+### Jump to empty line
 Vim has jump to previous/next empty line bound to `{ / }` by default, which makes sense on a US keyboard layout, but on a scandinavian layout it's pretty difficult to use. So I've rebound it to `shift + j / k`, which overwrites some existing keybinds, but it's probably fine.
 ```
 vim.keymap.set({ "n", "v" }, "K", "{")
 vim.keymap.set({ "n", "v" }, "J", "}")
 ```
 
-## Move line
+### Move line
 I've added `alt + j / k` to move a line up and down.
 ```
 vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
