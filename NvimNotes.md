@@ -121,6 +121,15 @@ By default the tab size is pretty large. We can change this with `vim.opt.tabsto
 - `Ctrl+w h/j/k/l` Move between splits
 - `Ctrl+w q` Close split
 
+### Resizing windows
+- `Ctrl+w <` Make window narrower
+- `Ctrl+w >` Make window wider
+- `Ctrl+w +` Make window taller
+- `Ctrl+w -` Make window shorter
+- `Ctrl+w =` Make windows equal
+
+Each of these will modify the size by 1, which is not a lot. Prefix with a count to resize by more than one. E.g. to widen by 20, input `20 Ctrl+w >`
+
 # Plugins
 
 ## Oil
