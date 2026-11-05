@@ -107,14 +107,6 @@ Operations can also be applied to different text objects. The format is
 - `t` Inner / around HTML tags
 For example: `diw` to delete a word.
 
-## Config
-The config file is in `~/.config/nvim/init.lua`
-
-To add line numbers we can use the command `vim.opt.number = true`. Because we can easily jump number of lines with commands such as `10j`, it is nice to know where the relative line number. The command for relative line numbers is `vim.opt.relativenumber = true`.
-By setting both to be true, we get relative numbers, while we also get the actual line number of the line we are currently on.
-
-By default the tab size is pretty large. We can change this with `vim.opt.tabstop = 3`, this will make a tab be 3 characters wide. There is a different setting for tab width for some specific vim functions, to make these automatically match the tabstop size, we can set it to zero `vim.opt.shiftwidth = 0`. Finally, we can make tabs automatically expand to spaces (or not) with the command `vim.opt.expandtab = true`.
-
 ## Splits & Windows
 - `Ctrl+w s` Horisontal split
 - `Ctrl+w v` Vertical split
@@ -129,6 +121,14 @@ By default the tab size is pretty large. We can change this with `vim.opt.tabsto
 - `Ctrl+w =` Make windows equal
 
 Each of these will modify the size by 1, which is not a lot. Prefix with a count to resize by more than one. E.g. to widen by 20, input `20 Ctrl+w >`
+
+## Config
+The config file is in `~/.config/nvim/init.lua`
+
+To add line numbers we can use the command `vim.opt.number = true`. Because we can easily jump number of lines with commands such as `10j`, it is nice to know where the relative line number. The command for relative line numbers is `vim.opt.relativenumber = true`.
+By setting both to be true, we get relative numbers, while we also get the actual line number of the line we are currently on.
+
+By default the tab size is pretty large. We can change this with `vim.opt.tabstop = 3`, this will make a tab be 3 characters wide. There is a different setting for tab width for some specific vim functions, to make these automatically match the tabstop size, we can set it to zero `vim.opt.shiftwidth = 0`. Finally, we can make tabs automatically expand to spaces (or not) with the command `vim.opt.expandtab = true`.
 
 # Plugins
 
