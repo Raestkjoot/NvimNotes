@@ -254,9 +254,9 @@ vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
 # Plugin Manager (Lazy)
 [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-Once you reach the 2-3 plugins mark, it's time to consider using a package manager. Lazy manages installing, updating and seting up plugins for you.
+Once you reach the 2-3 plugins mark, it's time to consider using a package manager. Lazy manages installing, updating and setting up plugins for you.
 
-We can write some code to check if lazy is installed and install it if it is not
+We can write some code to check if lazy is installed and install it if it is not. Replace everything in init.lua with this
 ```lua
 vim.g.mapleader = " "  -- must be set before lazy loads
 
@@ -277,7 +277,7 @@ require("lazy").setup("plugins", {
 require("config.keymaps")
 ```
 
-Then add a lua directory with a plugins sub-directory and a config sub-directory
+Then add a `lua` directory with `plugins` and `config` sub-directories
 ```
 ~/.config/nvim/
 ├── init.lua
@@ -290,7 +290,7 @@ Then add a lua directory with a plugins sub-directory and a config sub-directory
         ├── telescope.lua
 ```
 
-In `options.lua` we will add our options
+In `options.lua` we will add our vim options
 ```lua
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -310,7 +310,7 @@ vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
 ```
 
-Now, lets add our plugins. To maintain an easy overview, we seperate each plugin's setup into single files.
+Now, lets add our plugins. To maintain an easy overview, we seperate each plugin's setup into single files. First, Oil.
 ```lua
 return {
   "stevearc/oil.nvim",
