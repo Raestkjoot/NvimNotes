@@ -356,6 +356,7 @@ If you have the plugins installed already, delete them to avoid having duplicate
 
 ## neo-tree
 [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
+
 I find it quite nice to be able to get an overview of my project layout with a file tree on the side. Neo-tree is a tree structure viewer that works for files, git, etc.
 
 To add neo-tree to your plugins, create a `neo-tree.lua` file in your `/plugins` folder and add the basic neo-tree setup
@@ -383,6 +384,7 @@ I have customized mine a bit:
 - `<h>` closes the current folder
 - `<.>` disabled since I tend to miss-click it when going for `<->`
 - `<->` go up once.
+
 I also made sure that it opens on the left-hand side on startup, but only if I open a folder. If I open a file, neo-tree does not start, which also means nvim opens slightly faster for simple one-file edits.
 ```lua
 return {
