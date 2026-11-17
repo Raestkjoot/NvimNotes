@@ -170,6 +170,48 @@ The cool thing with Oil is that editing your file tree works just like regular t
 - **Discard:** If you want to discard your changes, then quit without writing `:q!`.
 - **Select:** Select a file or directory with `enter` or, if you've bound it, `space`.
 
+### Telescope
+[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+
+A highly extendable fuzzy finder. Use to quickly search for and open a file from the current directory, including sub-directories.
+
+**Setup:**
+Telescope needs plenary as a dependancy, so we clone both into a new telescope directory in the `pack/telescope/start/` directory, so Neovim loads them automatically on startup
+```
+git clone --depth=1 https://github.com/nvim-lua/plenary.nvim.git \
+  "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/telescope/start/plenary.nvim
+
+git clone --depth=1 https://github.com/nvim-telescope/telescope.nvim.git \
+  "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/telescope/start/telescope.nvim
+```
+
+We can also clone the native sorter to make it faster. Note that it requires cmake and GCC or Clang.
+```
+git clone --depth=1 https://github.com/nvim-telescope/telescope-fzf-native.nvim.git \
+  "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/telescope/start/telescope-fzf-native.nvim
+cd "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/telescope/start/telescope-fzf-native.nvim && make
+```
+
+We include telescope in the init.lua file
+```
+local builtin = require('telescope.builtin')
+```
+
+We add these keymaps
+```
+vim.keymap.set('n', '<C-p>', telescope.find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<C-S-t>', telescope.live_grep, { desc = 'Grep' })
+vim.keymap.set('n', '<leader>fb', telescope.buffers, { desc = 'Buffers' })
+```    
+
+Finally, we add this to include the optional native sorter
+```
+require("telescope").load_extension("fzf")
+```
+
+**Usage:**
+To search and open a file, press `Ctrl+p` type the name until it shows up, then press enter to open.
+
 ## Keybinds
 ### Caps-Lock to Escape and Control
 The escape key is very important in vim, but it is one of the furthest keys from the home row. Meanwhile, caps-lock is one of the least important keys and it sits at one of the best positions right next to the homerow. 
