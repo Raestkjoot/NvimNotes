@@ -250,3 +250,100 @@ I've added `alt + j / k` to move a line up and down.
 vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
 ```
+
+# Plugin Manager (Lazy)
+[lazy.nvim](https://github.com/folke/lazy.nvim)
+
+Once you reach the 2-3 plugins mark, it's time to consider using a package manager. Lazy manages installing, updating and seting up plugins for you.
+
+We can write some code to check if lazy is installed and install it if it is not
+```lua
+vim.g.mapleader = " "  -- must be set before lazy loads
+
+require("config.options")
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable",
+    "https://github.com/folke/lazy.nvim.git", lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins", {
+  checker = { enabled = false },
+  change_detection = { notify = false },
+})
+
+require("config.keymaps")
+```
+
+Then add a lua directory with a plugins sub-directory and a config sub-directory
+```
+~/.config/nvim/
+├── init.lua
+└── lua/
+    ├── config/
+    │   ├── options.lua
+    │   └── keymaps.lua
+    └── plugins/
+        ├── oil.lua
+        ├── telescope.lua
+```
+
+In `options.lua` we will add our options
+```lua
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 3
+vim.opt.shiftwidth = 0 -- 0 = match tabstop
+vim.opt.expandtab = true
+vim.opt.breakindent = false
+vim.opt.cindent = true
+```
+
+In keymaps we add our custom keymaps
+```lua
+vim.keymap.set({ "n", "v" }, "J", "}", { desc = "Jump to previous empty line" })
+vim.keymap.set({ "n", "v" }, "K", "{", { desc = "Jump to next empty line" })
+
+vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
+```
+
+Now, lets add our plugins. To maintain an easy overview, we seperate each plugin's setup into single files.
+```lua
+return {
+  "stevearc/oil.nvim",
+  lazy = false, -- lets Oil handle `nvim some/dir`
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  opts = {
+    keymaps = {
+       ["<Space>"] = { "actions.select", nowait = true },
+    },
+  },
+  keys = {
+    { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
+  },
+}
+```
+
+Finally, telescope:
+```lua
+return {
+  "nvim-telescope/telescope.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  },
+  keys = {
+    { "<C-p>",      function() require("telescope.builtin").find_files() end, desc = "Find files" },
+    { "<C-S-t>",    function() require("telescope.builtin").live_grep() end,  desc = "Grep" },
+    { "<leader>fb", function() require("telescope.builtin").buffers() end,    desc = "Buffers" },
+  },
+  config = function()
+    require("telescope").load_extension("fzf")
+  end,
+}
+```
+
+If you have the plugins installed already, delete them to avoid having duplicates. Then restart nvim and let lazy initialize.
