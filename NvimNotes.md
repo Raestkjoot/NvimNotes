@@ -156,6 +156,12 @@ require("oil").setup({ keymaps = { ["<Space>"] = "actions.select" } })
 ```
 This lets us use `space` to enter files and directories.
 
+Another thing I've added now. The confirmation box gets annoying for simple edits, so I disabled it.
+```
+    skip_confirm_for_simple_edits = true,
+    delete_to_trash = true,
+```
+
 **Usage:**
 - `-` - Open the parent directory of the current file.
 - `nvim .` - We can start Neovim in some directory like this and it will open it with Oil.
@@ -256,7 +262,7 @@ vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line up" })
 
 Once you reach the 2-3 plugins mark, it's time to consider using a package manager. Lazy manages installing, updating and setting up plugins for you.
 
-We can write some code to check if lazy is installed and install it if it is not. Replace everything in init.lua with this
+We can write some code to check if lazy is installed and install it if it is not. Replace everything in `init.lua` with this
 ```lua
 vim.g.mapleader = " "  -- must be set before lazy loads
 
@@ -347,3 +353,159 @@ return {
 ```
 
 If you have the plugins installed already, delete them to avoid having duplicates. Then restart nvim and let lazy initialize.
+
+## neo-tree
+[neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
+I find it quite nice to be able to get an overview of my project layout with a file tree on the side. Neo-tree is a tree structure viewer that works for files, git, etc.
+
+To add neo-tree to your plugins, create a `neo-tree.lua` file in your `/plugins` folder and add the basic neo-tree setup
+```lua
+return {
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    },
+    lazy = false, -- neo-tree will lazily load itself
+  }
+}
+```
+
+I have customized mine a bit:
+- An event for resizing when nvim starts
+- Close if neo-tree is the last window
+- `<O>` open in file explorer
+- `<space>` opens a file or folder
+- `<l>` opens a file or folder
+- `<h>` closes the current folder
+- `<.>` disabled since I tend to miss-click it when going for `<->`
+- `<->` go up once.
+I also made sure that it opens on the left-hand side on startup, but only if I open a folder. If I open a file, neo-tree does not start, which also means nvim opens slightly faster for simple one-file edits.
+```lua
+return {
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    },
+    opts = {
+      event_handlers = {
+         {
+            event = "neo_tree_window_after_open",
+            handler = function()
+               vim.schedule(function()
+                  require("config.layout").on_open()
+               end)
+            end,
+         },
+      },
+      close_if_last_window = true,
+      filesystem = {
+        hijack_netrw_behavior = "disabled", -- let Oil own directory buffers
+      },
+      commands = {
+        reveal_in_files = function(state)
+          local node = state.tree:get_node()
+          local path = node:get_id()
+          if node.type == "file" then
+            vim.fn.jobstart({ "dolphin", "--select", path }, { detach = true })
+          else
+            vim.ui.open(path)
+          end
+        end,
+      },
+      window = {
+        width = 25,
+        mappings = {
+          ["O"] = "reveal_in_files",
+          ["<space>"] = { "open", nowait = true },
+          ["l"] = "open",
+          ["h"] = "close_node",
+          ["."] = "none", -- disable set_root because it's close to -
+          ["-"] = function(state)
+             local node = state.tree:get_node()
+             local parent_id = node:get_parent_id()
+             if parent_id then
+                require("neo-tree.ui.renderer").focus_node(state, parent_id)
+             end
+          end,
+        },
+      },
+    },
+    lazy = false,
+    init = function()
+      vim.api.nvim_create_autocmd("VimEnter", {
+        once = true,
+        callback = function()
+          local arg = vim.fn.argv(0)
+          if arg == "" then return end
+          local is_dir = vim.startswith(arg, "oil://") or vim.fn.isdirectory(arg) == 1
+          if not is_dir then return end
+          vim.schedule(function()
+            vim.cmd("Neotree show left")
+          end)
+        end,
+      })
+    end,
+  }
+}
+
+```
+
+I made it so the neo-tree panel resizes when the console window resizes past a certain threshold. I handle this in a new layout file `lua/config/layout.lua`
+```lua
+local THRESHOLD = 150 -- columns
+local WIDE, NARROW = 35, 20 -- WIDE should match window.width in neo-tree opts
+local shrunk = false
+
+local function tree_win()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "neo-tree" then
+      return win
+    end
+  end
+end
+
+local function adjust()
+  local win = tree_win()
+  if not win then
+    shrunk = false -- tree closed, so start fresh when it's reopened
+    return
+  end
+
+  local narrow = vim.o.columns < THRESHOLD
+  if narrow and not shrunk then
+    vim.api.nvim_win_set_width(win, NARROW)
+    shrunk = true
+  elseif not narrow and shrunk then
+    vim.api.nvim_win_set_width(win, WIDE)
+    shrunk = false
+  end
+end
+
+vim.api.nvim_create_autocmd("VimResized", {
+  group = vim.api.nvim_create_augroup("ResponsiveLayout", { clear = true }),
+  callback = adjust,
+})
+
+return {
+  -- called whenever neo-tree opens: it opens at full width, so reset and re-check
+  on_open = function()
+    shrunk = false
+    adjust()
+  end,
+}
+```
+
+Finally, we load this file in `init.lua`
+```lua
+require("config.layout")
+```
+
+With that, the neo-tree panel will resize to a `NARROW` (20) when the window is smaller than the threshold `THRESHOLD` (150) and vice-versa for `WIDE` (35).

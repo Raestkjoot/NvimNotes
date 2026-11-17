@@ -1,6 +1,7 @@
 vim.g.mapleader = " "  -- must be set before lazy loads
 
 require("config.options")
+require("config.layout")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
