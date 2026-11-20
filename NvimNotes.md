@@ -539,3 +539,47 @@ I also added `lua/config/autoquit.lua` to be able to quit when it and neo-tree a
 - `Ctrl+w+l` to navigate to the right panel where the terminal is.
 - `i` to enter insert mode in the terminal and input commands.
 - `Esc` to exit edit mode in the terminal and go back to the open buffer.
+
+## Harpoon
+[Harpoon](https://github.com/ThePrimeagen/harpoon)
+
+Typically work happens across a few different files. Harpoon lets you basically pin some files and quickly jump between them. I wanted an overview of the harpooned files, so I added a panel on top of the terminal that shows the harpooned files.
+
+`lua/plugins/harpoon.lua`
+```lua```
+return {
+   "ThePrimeagen/harpoon",
+   branch = "harpoon2",
+   dependencies = { "nvim-lua/plenary.nvim" },
+   keys = {
+      { "<leader>a", function() require("harpoon"):list():add() end, desc = "Harpoon: add file" },
+      {
+         "<leader>h",
+         function()
+            local harpoon = require("harpoon")
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+         end,
+         desc = "Harpoon: menu",
+      },
+      { "<leader>1", function() require("harpoon"):list():select(1) end, desc = "Harpoon: file 1" },
+      { "<leader>2", function() require("harpoon"):list():select(2) end, desc = "Harpoon: file 2" },
+      { "<leader>3", function() require("harpoon"):list():select(3) end, desc = "Harpoon: file 3" },
+      { "<leader>4", function() require("harpoon"):list():select(4) end, desc = "Harpoon: file 4" },
+      { "<leader>[", function() require("harpoon"):list():prev() end, desc = "Harpoon: previous" },
+      { "<leader>]", function() require("harpoon"):list():next() end, desc = "Harpoon: next" },
+   },
+   opts = {
+      settings = {
+         save_on_toggle = true,
+         sync_on_ui_close = true,
+      },
+   },
+}
+```
+
+(My leader key is space)
+- `<leader>a` Add the current file to the list of harpooned files.
+- `<leader>1` through `<leader>4` to jump to the file in that position in the list.
+- `<leader>h>` to open the list of harpooned files for editing.
+   - `dd` to remove from list.
+   - `p` to paste after removing to reorder the list.
