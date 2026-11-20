@@ -511,3 +511,31 @@ require("config.layout")
 ```
 
 With that, the neo-tree panel will resize to a `NARROW` (20) when the window is smaller than the threshold `THRESHOLD` (150) and vice-versa for `WIDE` (35).
+
+## Toggleterm
+[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)
+
+I wanted a terminal that I could have in a panel on the right side of my layout and could toggle depending on the size of the terminal. Enter toggleterm. I also added some niceities, like leaving the terminal with `esc` and making sure it doesn't keep nvim running if it's the last panel together with neo-tree.
+
+`lua/plugin/toggleterm.lua`
+```lua
+config = function(_, opts)
+  require("toggleterm").setup(opts)
+
+  vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = "term://*toggleterm#*",
+    callback = function(ev)
+      vim.keymap.set("t", "<Esc>", [[<C-\><C-n><C-w>p]], { buffer = ev.buf, desc = "Leave terminal" })
+    end,
+  })
+
+  vim.cmd("ToggleTerm")
+  vim.cmd("wincmd p")
+end,
+```
+
+I also added `lua/config/autoquit.lua` to be able to quit when it and neo-tree are the two last panels. At this point, the configs are getting a bit complicated, they are all in the config folder, so you can check them out there. Just be aware that from now the notes won't explain every implementation detail, only how to use it.
+
+- `Ctrl+w+l` to navigate to the right panel where the terminal is.
+- `i` to enter insert mode in the terminal and input commands.
+- `Esc` to exit edit mode in the terminal and go back to the open buffer.
