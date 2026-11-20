@@ -515,7 +515,7 @@ With that, the neo-tree panel will resize to a `NARROW` (20) when the window is 
 ## Toggleterm
 [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)
 
-I wanted a terminal that I could have in a panel on the right side of my layout and could toggle depending on the size of the terminal. Enter toggleterm. I also added some niceities, like leaving the terminal with `esc` and making sure it doesn't keep nvim running if it's the last panel together with neo-tree.
+I wanted a terminal that I could have in a panel on the right side of my layout and could toggle depending on the size of the terminal. Enter toggleterm. I also added some niceties, like leaving the terminal with `esc` and making sure it doesn't keep nvim running if it's the last panel together with neo-tree.
 
 `lua/plugin/toggleterm.lua`
 ```lua
@@ -546,7 +546,7 @@ I also added `lua/config/autoquit.lua` to be able to quit when it and neo-tree a
 Typically work happens across a few different files. Harpoon lets you basically pin some files and quickly jump between them. I wanted an overview of the harpooned files, so I added a panel on top of the terminal that shows the harpooned files.
 
 `lua/plugins/harpoon.lua`
-```lua```
+```lua
 return {
    "ThePrimeagen/harpoon",
    branch = "harpoon2",
@@ -578,6 +578,7 @@ return {
 ```
 
 (My leader key is space)
+
 - `<leader>a` Add the current file to the list of harpooned files.
 - `<leader>1` through `<leader>4` to jump to the file in that position in the list.
 - `<leader>h>` to open the list of harpooned files for editing.
